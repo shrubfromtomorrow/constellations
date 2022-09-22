@@ -17,21 +17,25 @@ function Light(id, x, y, radius, color) {
 let lightArray = [];
 
 
+let interval;
+
+
 let j = 0;
 
 function animate() {
   if (j > 0) {
     clearInterval(interval)
 
-    rand = Math.floor(Math.random() * 249);
-    console.log(rand);
+    rand1 = Math.floor(Math.random() * 249);
+    rand2 = Math.floor(Math.random() * 249);
+
 
     ctx.beginPath();
-    ctx.fillStyle = "pink";
-    x = lightArray[rand][1];
-    y = lightArray[rand][2];
-    ctx.arc(x, y, 20, 0, Math.PI*2);
-    ctx.fill();
+    ctx.strokeStyle = "white";
+    ctx.lineWidth = 3;
+    ctx.moveTo(lightArray[rand1].x, lightArray[rand1].y);
+    ctx.lineTo(lightArray[rand2].x, lightArray[rand2].y);
+    ctx.stroke();
   }
 
   else {
@@ -54,6 +58,11 @@ function clear() {
   ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
 }
 
-let interval = setInterval(animate, 100)
+function main() {
+  interval = setInterval(animate, 100);
+}
 
 
+window.addEventListener('load', (event) => {
+  main();
+});
